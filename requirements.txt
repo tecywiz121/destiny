@@ -1,0 +1,13 @@
+Django==1.7
+anyjson==0.3.3
+app==0.0.2
+billiard==3.3.0.18
+celery==3.1.16
+django-autoslug==1.7.2
+django-celery==3.1.16
+gunicorn==19.1.1
+kombu==3.0.23
+psycopg2==2.5.4
+pytz==2014.7
+redis==2.10.3
+wsgiref==0.1.2

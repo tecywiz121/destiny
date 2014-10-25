@@ -1,0 +1,39 @@
+{% extends "station/base.html" %}
+
+{% block contents %}
+<div class="container-fluid">
+    <div class="row">
+		<div class="col-xs-12 col-sm-6 col-sm-offset-3 puzzle-col">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title text-center puzzle">
+                        g͛̿ͬ̾̌ͣ͠҉̣̫̩̗̥̭ö̴̮̠̭͔͉̥͈́ͣͣ̈̏͑͂ ̴̬̹͎̦͓̱̝͕͂̆̑͌̒̉̑̚͜a̷̧̖͈̮̼̲̩̗͈̋͆̎ͧͥ͛̾̈͞w̨̙͇̪̬̫͓̙̣̪͋̾ͦ̓̚a̶̬̙͈ͬ̀͝y̵̭̲ͭ̍͡!̶̫̻̫̬̯̓̓̐̉
+                    </h1><!-- /.puzzle -->
+                </div><!-- /.panel-heading -->
+                <div class="panel-body">
+                    <form role="form" class="form-horizontal" method="POST" action="{% url 'puzzle' pk=puzzle.pk %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="puzzle-challenge">Challenge:</label>
+                            <div class="col-sm-10">
+                                <p class="form-control-static" id="puzzle-challenge">{{ puzzle.hint }}</p>
+                            </div><!-- /.col-sm-10 -->
+                        </div><!-- /.form-group -->
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="puzzle-response">Response:</label>
+                            <div class="col-sm-10">
+                                <input autocomplete="off" type="text" id="puzzle-response" class="form-control" name="solution">
+                            </div><!-- /.col-sm-10 -->
+                        </div><!-- /.form-group -->
+
+                        <hr>
+                        <div class="text-center">
+                            <button class="btn btn-danger" type="submit">†ê§† ¥ðµr lµ¢k!</button>
+                        </div><!-- /.text-center -->
+                    </form>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.puzzle-col -->
+    </div><!-- /.row -->
+</div><!-- /.container-fluid -->
+{% endblock %}

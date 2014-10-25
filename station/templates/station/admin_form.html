@@ -1,0 +1,81 @@
+{% extends "station/base.html" %}
+
+{% block contents %}
+<div class="container-fluid">
+    <div class="row">
+		<div class="col-xs-12 col-sm-6 col-sm-offset-3 admin-col">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title text-center admin">
+                        Access Logs
+                    </h1><!-- /.admin -->
+                </div><!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>User</th>
+                                <th>Activity</th>
+                                <th>Detail</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for activity in game.activities.all %}
+                            <tr>
+                                <td>{{ activity.created }}</td>
+                                <td>{{ activity.name }}</td>
+                                <td>{{ activity.get_action_display }}</td>
+                                <td>{{ activity.detail }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.admin-col -->
+    </div><!-- /.row -->
+    <div class="row">
+		<div class="col-xs-12 col-sm-6 col-sm-offset-3 admin-col">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title text-center admin">
+                        Self Destruct
+                    </h1><!-- /.admin -->
+                </div><!-- /.panel-heading -->
+                <div class="panel-body">
+                    {% if game.state == game.STATE_INITIAL %}
+                    <div class="text-center">
+                        Once engaged, you will have one hour before the reactor overloads.
+                    </div><!-- /.text-center -->
+                    <hr>
+                    {% endif %}
+                    <form role="form" class="form-horizontal" method="POST" action="{% url 'admin' pk=game.pk %}">
+                        {% csrf_token %}
+                        {% if game.state == game.STATE_INITIAL %}
+                        <input type="hidden" name="mode" value="start">
+                        {% else %}
+                        <input type="hidden" name="mode" value="stop">
+                        {% endif %}
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="admin-confirmation">Type 'confirm':</label>
+                            <div class="col-sm-9">
+                                <input autocomplete="off" type="text" id="admin-confirmation" class="form-control" name="confirmation">
+                            </div><!-- /.col-sm-10 -->
+                        </div><!-- /.form-group -->
+
+                        <hr>
+                        <div class="text-center">
+                            {% if game.state == game.STATE_INITIAL %}
+                            <button class="btn btn-danger" type="submit">Engage Self Destruct!</button>
+                            {% else %}
+                            <button class="btn btn-success" type="submit">Disengage Self Destruct!</button>
+                            {% endif %}
+                        </div><!-- /.text-center -->
+                    </form>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.admin-col -->
+    </div><!-- /.row -->
+</div><!-- /.container-fluid -->
+{% endblock %}

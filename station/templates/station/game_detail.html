@@ -1,0 +1,41 @@
+{% extends "station/base.html" %}
+{% load staticfiles %}
+{# vim: noet ts=4 sts=4 sw=4 : #}
+
+{% block contents %}
+<div class="container-fluid">
+	<div class="row overall-row">
+		<div class="col-xs-12 col-sm-6 col-sm-offset-3 overall-col">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h1 class="panel-title text-center overall overall-{{status}}">
+						{{ status }}
+					</h1><!-- /.panel-title -->
+				</div><!-- /.panel-heading -->
+				<div class="panel-body">
+					{% if status == "overload" %}
+					<div class="overload" data-start="{{ game.start_time|date:'c' }}">
+					</div>
+					{% endif %}
+					<table class="table status-table">
+						<thead>
+							<tr>
+								<th>System</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for system in game.systems.all %}
+							<tr>
+								<td><h5 class="system-name">{{ system.name }}</h5></td>
+								<td><h5 class="system-status system-status-{{system.get_status_display}}">{{ system.get_status_display }}</h5></td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div><!-- /.panel-body -->
+			</div><!-- /.panel -->
+		</div>
+	</div><!-- /.overall-row -->
+</div><!-- /.container-fluid -->
+{% endblock %}

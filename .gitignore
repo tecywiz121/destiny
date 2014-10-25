@@ -1,0 +1,5 @@
+celerybeat-schedule
+*.sqlite3
+venv/
+*.swp
+*.pyc

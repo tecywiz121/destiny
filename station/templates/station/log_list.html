@@ -1,0 +1,25 @@
+{% extends "station/base.html" %}
+
+{% block contents %}
+<div class="container-fluid">
+    {% for log in object_list %}
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <article class="panel panel-default">
+                <header class="panel-heading">
+                    <h2 class="panel-title">
+                        {{ log.title }}
+                        <small>
+                            by <author>{{ log.author }}</author>
+                        </small>
+                    </h2><!-- /.panel-title -->
+                </header><!-- /.panel-heading -->
+                <div class="panel-body">
+                    {{ log.contents|safe }}
+                </div><!-- /.panel-body -->
+            </article><!-- /.panel -->
+        </div><!-- /.col-sm-8 -->
+    </div><!-- /.row -->
+    {% endfor %}
+</div><!-- /.container-fluid -->
+{% endblock %}

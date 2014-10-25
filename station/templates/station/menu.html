@@ -1,0 +1,115 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!-- vim: noet ts=4 sts=4 sw=4 : -->
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>Destiny</title>
+		<link rel="stylesheet" href="{% static "bootstrap/css/bootstrap-dark.min.css" %}">
+		<link rel="stylesheet" href="{% static "countdown/jquery.countdown.css" %}">
+		<link rel="stylesheet" href="{% static "destiny/css/main.css" %}">
+	</head>
+	<body>
+		<a class="fullscreen" href="#"><span class="glyphicon glyphicon-fullscreen"></span></a>
+		<div class="container-fluid wrap">
+			<div class="row wrap-row">
+				<div class="col-xs-12 col-sm-5 col-lg-3 side-nav">
+					<ul role="tablist" class="nav nav-pills nav-stacked">
+						<li class="status"><a role="tab" data-href="{% url 'status' pk=game %}" href="#">Destiny</a></li>
+						<li class="logs disabled"><a role="tab" data-href="{% url 'logs' pk=game %}" href="#">Personal Logs</a></li>
+						<li class="comms disabled"><a role="tab" data-href="{% url 'comms' pk=game %}" href="#">Communications</a></li>
+						<li class="repairs disabled"><a role="tab" data-href="{% url 'repairs' pk=game %}" href="#">Repairs</a></li>
+						<li class="admin disabled"><a role="tab" data-href="{% url 'admin' pk=game %}" href="#">Administration</a></li>
+						<li class="unlock"><a class="auth-toggle" href="#">Unlock Terminal</a></li>
+					</ul><!-- /.nav-stacked -->
+				</div><!-- /.side-nav -->
+				<div class="col-xs-12 col-sm-7 col-lg-9" id="contents-wrap">
+				</div><!-- /#contents-wrap -->
+			</div><!-- /.row -->
+		</div><!-- /.container-fluid -->
+
+		<div tabindex="-1" id="auth-modal" role="dialog" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h4 class="modal-title">Authentication</h4>
+					</div><!-- /.modal-header -->
+					<div class="modal-body">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-xs-12 col-sm-6">
+									<div id="reader" style="width: 200px; height: 200px;">
+									</div><!-- /#reader -->
+								</div>
+								<div class="text-center col-xs-12 col-sm-6">
+									Please scan your identification card now.
+								</div>
+							</div><!-- /.row -->
+						</div><!-- /.container-fluid -->
+					</div><!-- /.modal-body -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					</div><!-- /.modal-footer -->
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+		<div tabindex="-1" id="welcome-modal" role="dialog" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h4 class="modal-title">Welcome</h4>
+					</div><!-- /.modal-header -->
+					<div class="modal-body">
+						<h3><small>Welcome</small> <span class="current-user"></span></h3>
+						<h3><small>Access Level</small> <span class="current-level"></span></h3>
+					</div><!-- /.modal-body -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
+					</div><!-- /.modal-footer -->
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+		<!-- jQuery -->
+		<script type="text/javascript" src="{% static "jquery/jquery.min.js" %}"></script>
+
+		<!-- jQuery Countdown -->
+		<script type="text/javascript" src="{% static "countdown/jquery.plugin.js" %}"></script>
+		<script type="text/javascript" src="{% static "countdown/jquery.countdown.js" %}"></script>
+
+		<!-- Screenfull -->
+		<script type="text/javascript" src="{% static "screenfull/screenfull.min.js" %}"></script>
+
+		<!-- Bootstrap -->
+		<script type="text/javascript" src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+
+		<!-- jsqrcode -->
+		<script type="text/javascript" src="{% static "html5-qrcode/grid.js" %}"></script>
+		<script type="text/javascript" src="{% static "html5-qrcode/version.js" %}"></script>
+		<script type="text/javascript" src="{% static "html5-qrcode/detector.js" %}"></script>
+		<script type="text/javascript" src="{% static "html5-qrcode/formatinf.js" %}"></script>
+		<script type="text/javascript" src="{% static "html5-qrcode/errorlevel.js" %}"></script>
+		<script type="text/javascript" src="{% static "html5-qrcode/bitmat.js" %}"></script>
+		<script type="text/javascript" src="{% static "html5-qrcode/datablock.js" %}"></script>
+		<script type="text/javascript" src="{% static "html5-qrcode/bmparser.js" %}"></script>
+		<script type="text/javascript" src="{% static "html5-qrcode/datamask.js" %}"></script>
+		<script type="text/javascript" src="{% static "html5-qrcode/rsdecoder.js" %}"></script>
+		<script type="text/javascript" src="{% static "html5-qrcode/gf256poly.js" %}"></script>
+		<script type="text/javascript" src="{% static "html5-qrcode/gf256.js" %}"></script>
+		<script type="text/javascript" src="{% static "html5-qrcode/decoder.js" %}"></script>
+		<script type="text/javascript" src="{% static "html5-qrcode/qrcode.js" %}"></script>
+		<script type="text/javascript" src="{% static "html5-qrcode/findpat.js" %}"></script>
+		<script type="text/javascript" src="{% static "html5-qrcode/alignpat.js" %}"></script>
+		<script type="text/javascript" src="{% static "html5-qrcode/databr.js" %}"></script>
+
+		<!-- html5-qrcode -->
+		<script type="text/javascript" src="{% static "html5-qrcode/html5-qrcode.js" %}"></script>
+
+		<!-- Custom -->
+		<script type="text/javascript" src="{% static "destiny/js/main.js" %}"></script>
+	</body>
+</html>

@@ -1,0 +1,84 @@
+.fullscreen {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.side-nav {
+    background-color: #030303;
+    font-variant: small-caps;
+}
+
+.puzzle {
+    font-size: 400%;
+    color: red;
+}
+
+.overall {
+    text-transform: uppercase;
+    font-size: 400%;
+}
+
+.overall.overall-good {
+    color: #77B300;
+}
+
+.overall-overload {
+    color: #C00;
+}
+
+.overall-warning {
+    color: #F80;
+}
+
+.status-table td, .status-table th {
+    text-align: center;
+    font-variant: small-caps;
+}
+
+.system-status {
+    text-transform: uppercase;
+}
+
+.system-status-online {
+    color: #77B300;
+}
+
+.system-status-offline {
+    color: #C00;
+}
+
+.is-countdown {
+    background: transparent;
+    border: none;
+    padding-bottom: 15px;
+}
+
+.is-countdown::after {
+    content:'';
+    display: table;
+    clear:both;
+}
+
+#contents-wrap {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+@media(min-width:768px) {
+    .side-nav {
+        height: 100%;
+        font-size: 200%;
+    }
+
+    html, body {
+        width: 100%;
+        height: 100%;
+    }
+
+    .wrap, .wrap-row {
+        height: 100%;
+    }
+}
